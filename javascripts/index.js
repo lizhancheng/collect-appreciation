@@ -1,4 +1,4 @@
-((root) => {
+((root, $) => {
   /**
    * text color: #5b6870
    * bar color : #efedef
@@ -9,14 +9,15 @@
   function calculate() {
     if(!arguments.length) return null;
 
+    let args;
     const slice = Array.prototype.slice;
 
-    arguments = slice.call(arguments)
+    args = slice.call(arguments)
                 .map(value => new FixNumber(value));
     
-    let result = [...Object.keys(arguments[0])];
+    let result = [...Object.keys(args[0])];
 
-    result = result.map(item => arguments.reduce((v1, v2) => v1[item] * v2[item]));
+    result = result.map(item => args.reduce((v1, v2) => v1[item] * v2[item]));
 
     return result[0] / result[1];
 
@@ -40,7 +41,8 @@
       let { value, isInteger } = this;
 
       if(isInteger(value)) {
-        return value;
+        this.times = 1;
+        return true;
       }
 
       value     = value.toLocaleString();
@@ -63,11 +65,14 @@
     init(src) {
       // this.cas.height = 770;
       // this.cas.width  = 400;
+      this.cas.classList.remove('hidden');
       this.loadImage(src);
-
+      
     }
 
     onLoad(img) {
+      URL.revokeObjectURL(img.src);
+
       const { cas, ctx } = this;
       this.image = this.image || img;
 
@@ -148,8 +153,9 @@
       // 画心形
       let img   = new Image();
       const { ctx, crd } = this;
-      const { scale } = this.img;
+      let { scale } = this.img;
 
+      scale = scale > 0.43 ? 0.43 : scale;
       img.onload = function() {
         ctx.drawImage(img, crd[0] + 8, crd[1] + 8, img.width * scale, img.height * scale);
       }
@@ -236,10 +242,36 @@
     }
 
     reinit() {
-      this.onLoad();
+      this.onLoad(this.image);
     }
 
   }
 
+  function init() {
+    const $file = $('#userfile');
+
+    $file.addEventListener('change', (e) => {
+      let files = e.target.files;
+
+      Array.prototype.forEach
+      .call(
+        files,
+
+        file =>
+          file.type.match(/^image/) &&
+          col.init(
+            URL.createObjectURL(file)
+          )
+      );
+
+      $file.parentNode
+      .classList.add('hidden');
+    }, false);
+  }
+
+  root.URL = root.URL || root.webkitURL || root.mozURL;
+
   root.col = new Collection();
-})(window);
+
+  init();
+})(window, document.querySelector.bind(document));

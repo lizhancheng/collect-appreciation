@@ -1,5 +1,8 @@
 {
   "name": "collect-appreciation",
+  "scripts": {
+    "dev": "gulp"
+  },
   "version": "1.0.0",
   "description": "collectAppreciation",
   "main": "index.js",
@@ -8,5 +11,14 @@
   "license": "MIT",
   "dependencies": {
     "chinese-name": "^0.3.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-sourcemaps": "^2.4.1",
+    "gulp-uglify": "^2.1.1",
+    "pump": "^1.0.2"
   }
 }
