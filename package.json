@@ -1,0 +1,12 @@
+{
+  "name": "collect-appreciation",
+  "version": "1.0.0",
+  "description": "collectAppreciation",
+  "main": "index.js",
+  "repository": {},
+  "author": "zhancheng.li",
+  "license": "MIT",
+  "dependencies": {
+    "chinese-name": "^0.3.0"
+  }
+}
