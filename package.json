@@ -10,7 +10,10 @@
   "author": "zhancheng.li",
   "license": "MIT",
   "dependencies": {
-    "chinese-name": "^0.3.0"
+    "chinese-name": "^0.3.0",
+    "requirejs": "^2.3.3",
+    "urijs": "^1.18.9",
+    "vconsole": "^2.5.2"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.24.0",

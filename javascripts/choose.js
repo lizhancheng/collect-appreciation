@@ -39,10 +39,10 @@
       }
     })()
 
-    cas.addEventListener('touchstart', (e) => {
+    cas.addEventListener('touchend', (e) => {
       // mask.get().show();
       col.reinit();
-      col.next(e.touches[0].pageY - e.target.offsetTop);
+      col.next(e.changedTouches[0].pageY - e.target.offsetTop);
     });
 
   }
