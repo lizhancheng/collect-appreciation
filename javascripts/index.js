@@ -252,13 +252,18 @@
 
     $file.addEventListener('change', (e) => {
       let files = e.target.files;
+      // deal with wechat browser without file.type
+      const isWechat = /micromessenger/ig.test(navigator.userAgent);
 
       Array.prototype.forEach
       .call(
         files,
 
         file =>
-          file.type.match(/^image/) &&
+          (
+            file.type.match(/^image/) ||
+            isWechat
+          ) &&
           col.init(
             URL.createObjectURL(file)
           )

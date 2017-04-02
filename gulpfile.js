@@ -7,6 +7,7 @@ const uglify = require('gulp-uglify');
 const sourcemaps = require('gulp-sourcemaps');
 const babel = require('gulp-babel');
 const concat = require('gulp-concat');
+const browserSync = require('browser-sync').create();
 
 gulp.task('compress', () => {
   return gulp.src([
@@ -48,7 +49,18 @@ gulp.task('compress', () => {
   .pipe(gulp.dest('dist'))
 });
 
-gulp.task('default', ['compress'], function() {
+gulp.task('serve', function() {
+  browserSync.init({
+    server: {
+      baseDir: './'
+    }
+  });
+})
 
-  gulp.watch('./javascripts/*.js', ['compress']);
+gulp.task('default', ['compress', 'serve'], function() {
+
+  var watcher = gulp.watch('./javascripts/*.js', ['compress']);
+  watcher.on('change', function() {
+    browserSync.reload();
+  });
 })
