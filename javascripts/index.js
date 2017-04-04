@@ -70,11 +70,16 @@
       
     }
 
-    onLoad(img) {
+    onLoad(img, isNew) {
       URL.revokeObjectURL(img.src);
 
       const { cas, ctx } = this;
-      this.image = this.image || img;
+      
+      if(isNew) {
+        this.image = img;
+      } else {
+        this.image = this.image || img;
+      }
 
       let iwidth = this.image.width, iheight = this.image.height;
       let cwidth = cas.width, cheight = 540;
@@ -265,7 +270,8 @@
             isWechat
           ) &&
           col.init(
-            URL.createObjectURL(file)
+            URL.createObjectURL(file),
+            true
           )
       );
 

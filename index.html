@@ -10,11 +10,19 @@
     </script>
 </head>
 <body>
+  <div class='ui-wrapper'>
     <div class="ui-upload">
         &plus;
         <input type="file" name="userfile" id="userfile">
     </div>
     <canvas id="cas" class="hidden"></canvas>
+    <aside class="ui-modal hidden">
+        <ul class="ui-side-right">
+            <li class="upload-repeat">重新上传</li>
+            <li class="save-image">保存图片</li>
+        </ul>
+    </aside>
+  </div>
     <script src="dist/index.js"></script>
 </body>
 </html>
